@@ -3,6 +3,17 @@ import pandas as pd
 
 def process_data(file, domain_name):
     df = pd.read_csv(file)
+
+    # Function to fill empty values
+    def fill_empty_values(df):
+        columns_to_fill = ['Product ID [Non Editable]', 'Product Type [Non Editable]', 'Product Page', 
+                           'Product URL', 'Title', 'Description', 'SKU']
+        # 'ffill' stands for 'forward fill' and will propagate last valid observation forward.
+        df[columns_to_fill] = df[columns_to_fill].fillna(method='ffill')
+        return df
+
+    # Call the function you just defined
+    df = fill_empty_values(df)
     
     # Rename columns and perform other data processing as in your script
     df.rename(columns={'Product ID [Non Editable]': 'item_group_id',
