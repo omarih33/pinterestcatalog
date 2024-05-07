@@ -4,14 +4,6 @@ import pandas as pd
 def process_data(file, domain_name):
     df = pd.read_csv(file)
 
-    # Check for and handle duplicate item IDs
-    duplicate_ids = df[df.duplicated('Product ID [Non Editable]')]['Product ID [Non Editable]']
-    if not duplicate_ids.empty:
-        st.write("Duplicate item IDs found. Deleting duplicates...")
-        # Delete duplicates
-        df.drop_duplicates(subset='Product ID [Non Editable]', keep='first', inplace=True)
-        st.write("Duplicates deleted.")
-
     # Function to fill empty values
     def fill_empty_values(df):
         columns_to_fill = ['Product ID [Non Editable]', 'Product Type [Non Editable]', 'Product Page', 
