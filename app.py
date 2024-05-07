@@ -27,6 +27,9 @@ def process_data(file, domain_name):
     # Convert availability to 'in stock' or 'out of stock'
     df['availability'] = df['availability'].apply(lambda x: 'in stock' if x >= 1 else 'out of stock')
 
+    # Extract only one image link per product
+    df['image_link'] = df['image_link'].str.split(' ').str[0]
+
     # Save the processed data to a new CSV file
     processed_file = "processed.csv"
     df.to_csv(processed_file, index=False)
