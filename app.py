@@ -24,6 +24,9 @@ def process_data(file, domain_name, country_currency, google_product_category):
     # Format price
     df['price'] = df['price'].astype(str) + country_currency
 
+    # Ensure availability column contains numerical values
+    df['availability'] = pd.to_numeric(df['availability'], errors='coerce').fillna(0)
+
     # Convert availability to 'in stock' or 'out of stock'
     df['availability'] = df['availability'].apply(lambda x: 'in stock' if x >= 1 else 'out of stock')
 
