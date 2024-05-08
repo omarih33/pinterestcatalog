@@ -52,6 +52,8 @@ def main():
     country_currency = st.text_input("Enter the country currency (e.g., USD)")
     google_product_category = st.text_input("Enter Google Product Category")
 
+    st.markdown("You can find the appropriate Google Product Category for your products [here](https://productcategory.net/).")
+
     if file and domain_name and country_currency and google_product_category:
         processed_file = process_data(file, domain_name, country_currency, google_product_category)
         st.download_button("Download your Pinterest Catalog", data=open(processed_file, 'rb'), file_name="processed.csv")
